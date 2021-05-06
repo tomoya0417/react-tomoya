@@ -1,5 +1,7 @@
 function App() {
-function clickMe(){alert("hello world")}
+const clickMe=()=>{
+  window.alert("Hello world")
+}
   return (
        
         <div>
@@ -8,7 +10,7 @@ function clickMe(){alert("hello world")}
           </button>
         </div>
     
-    
+
   )
 }
 
