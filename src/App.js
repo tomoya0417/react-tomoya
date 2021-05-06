@@ -1,17 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
-
 function App() {
+function clickMe(){alert("hello world")}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello React
-        </p>
-      </header>
-    </div>
-  );
+       
+        <div>
+          <button onClick={clickMe}>
+            Hello Word
+          </button>
+        </div>
+    
+    
+  )
 }
 
 export default App;
