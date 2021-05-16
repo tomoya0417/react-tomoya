@@ -40,6 +40,7 @@ function App() {
       <div>
         <button onClick={add}>add</button>
         {name}
+
       </div>
 
       <div>
