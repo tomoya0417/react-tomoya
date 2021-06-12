@@ -1,53 +1,104 @@
-import React, { useState, useEffect } from 'react'
+import React, { useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Table } from 'react-bootstrap';
+import { ADD_EVENT, ALL_DELETE} from '../actions/index';
+import reducer from '../reducers/index';
+import { Button, Form, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 
 const ComponentB = () =>{
-  const [data, setData] = useState()
-  useEffect(() => {
-    console.log('useEffect が呼び出されました。 ');
-  
-    axios.get('https://jsonplaceholder.typicode.com/posts').then(res => {
-      console.log(res)
-      setData(res.data)
-    })
-  }, []);
-  
-  return(
-    <div>
-      <div>ComponentB</div>
-      <Link to="componentc">ComponentCへ移動</Link>
+  const [ state, dispatch ] = useReducer(reducer, []);
+  const [ title, setTitle ] = useState('');
+  const [ body, setBody ] = useState('');
+  const [ comment, setComment ] = useState('');
 
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>userId</th>
-            <th>title</th>
-            <th>body</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            data && data.map((d, index) => {
-              return (
-                <tr>
-                  <td>{d.id}</td>
-                  <td>{d.userId}</td>
-                  <td>{d.title}</td>
-                  <td>{d.body.toString()}</td>
-                </tr>
-              );
-            })
-          }
-        </tbody>
-      </Table>
-    </div>
-  );
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch({
+      type: ADD_EVENT,
+      title,
+      body
+});
+setTitle('');
+setBody('');
+setComment('');
 };
 
+const deleteClick = (e) => {
+  e.preventDefault();
+  dispatch({
+    type: ALL_DELETE,
+    title,
+    body 
+});
+setTitle('');
+setBody('');
+setComment('');
+};
+  
+return (
+  <div>
+  <div>ComponentB</div>
+  <Link to="componentc">ComponentCへ移動</Link>
 
+<Form>
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label>Title</Form.Label>
+    <Form.Control
+      type="text"
+      placeholder="title"
+      value={title}
+      onChange={(e) => setTitle(e.target.value)}
+ />
+ <Form.Label>Body</Form.Label>
+ <Form.Control
+   type="text"
+   placeholder="body"
+   value={body}
+   onChange={(e) => setBody(e.target.value)}
+ />
+ <Form.Label>Comment</Form.Label>
+ <Form.Control
+   type="text"
+   placeholder="comment"
+   value={comment}
+   onChange={(e) => setComment(e.target.value)}
+ />
+ </Form.Group>
+  <Button variant="primary" onClick={handleClick}>
+    イベント作成
+  </Button>
+  <Button variant="danger" onClick={deleteClick}>
+    イベント全削除
+  </Button>
+ </Form>
+
+ <h1>Table</h1>
+    <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>title</th>
+          <th>body</th>
+          <th>#</th>
+        </tr>
+      </thead>
+      <tbody>
+        {state.map((data, index) => {
+          return (
+            <tr key={index}>
+            <td>{data.id}</td>
+            <td>{data.title}</td>
+            <td>{data.body}</td>
+            <td>
+              <Button variant="danger">削除</Button>
+            </td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </Table>
+   </div>
+  );
+};
 
 export default ComponentB;
