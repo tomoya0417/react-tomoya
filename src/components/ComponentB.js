@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ADD_EVENT, ALL_DELETE} from '../actions/index';
+import { ADD_EVENT, ALL_DELETE, DELETE} from '../actions/index';
 import reducer from '../reducers/index';
 import { Button, Form, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,8 +16,10 @@ const ComponentB = () =>{
     dispatch({
       type: ADD_EVENT,
       title,
-      body
+      body,
+      comment
 });
+
 setTitle('');
 setBody('');
 setComment('');
@@ -25,7 +27,7 @@ setComment('');
 
 const deleteClick = (e) => {
   e.preventDefault();
-  dispatch({
+    dispatch({
     type: ALL_DELETE,
     title,
     body 
@@ -79,21 +81,29 @@ return (
           <th>id</th>
           <th>title</th>
           <th>body</th>
+          <th>comment</th>
           <th>#</th>
         </tr>
       </thead>
       <tbody>
         {state.map((data, index) => {
+         const handleClick2 = () => {
+            dispatch({
+              type: DELETE,
+              id: data.id
+            })
+         } 
           return (
             <tr key={index}>
             <td>{data.id}</td>
             <td>{data.title}</td>
             <td>{data.body}</td>
+            <td>{data.comment}</td>
             <td>
-              <Button variant="danger">削除</Button>
+                <Button variant="danger" onClick={handleClick2}>削除</Button>
             </td>
           </tr>
-        );
+        )
       })}
     </tbody>
   </Table>
