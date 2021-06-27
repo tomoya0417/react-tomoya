@@ -1,11 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext } from 'react';
 import { Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { TODO } from '../actions';
+import {Store} from '../store/index.js'
 
 const ComponentA = () =>{
   const [ count, setCount ] = useState(0);
+
+  const { globalState, setGlobalState } = useContext(Store);
  
   const [data, setData] = useState()
   useEffect(() => {
@@ -14,6 +18,10 @@ const ComponentA = () =>{
     axios.get('https://jsonplaceholder.typicode.com/todos').then(res => {
       console.log(res)
       setData(res.data)
+      setGlobalState({
+            type: TODO,
+            data: res.data
+        });
     })
   }, []);
 

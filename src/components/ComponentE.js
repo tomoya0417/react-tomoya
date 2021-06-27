@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { Store } from '../store/index';
-import { INCREMENT, DECREMENT, RESET } from '../actions/index';
+import { INCREMENT, DECREMENT, RESET, THREE } from '../actions/index';
 const ComponentE = () => {
     const { globalState, setGlobalState } = useContext(Store);
+   
     const handleClick = () =>{
         setGlobalState({
             type: INCREMENT
@@ -21,6 +22,14 @@ const ComponentE = () => {
         });
     };
 
+    const handleClick4 = () =>{
+        setGlobalState({
+            type: THREE
+        });
+    };
+
+    
+
     console.log(globalState);
 
 return (
@@ -31,6 +40,8 @@ return (
         <button onClick={handleClick2}>-1</button>
 
         <button onClick={handleClick3}>reset</button>
+
+        <button onClick={handleClick4}>three</button>
 
     </div>
    );

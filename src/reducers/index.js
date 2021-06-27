@@ -1,4 +1,4 @@
-import { INCREMENT, DECREMENT, RESET, ADD_EVENT, ALL_DELETE, DELETE, } from '../actions/index';
+import { INCREMENT, DECREMENT, RESET, ADD_EVENT, ALL_DELETE, DELETE, THREE, TODO} from '../actions/index';
 
 const reducer = (state = [], action) => {
     switch (action.type) {
@@ -22,6 +22,20 @@ const reducer = (state = [], action) => {
         case DELETE:
             const point = state.filter(state => state.id !== action.id);
             return point
+        
+        case THREE:
+            if(state.count === 0)
+               return{...state, count: state.count }
+        
+            if(state.count % 3 === 0){
+              return {...state, count: state.count +10}
+            } else{
+                return state
+            }
+            
+        case　TODO:
+            console.log(action.data)
+            return state
 
 
             default:
