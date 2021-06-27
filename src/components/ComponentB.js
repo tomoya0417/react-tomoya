@@ -4,12 +4,16 @@ import { ADD_EVENT, ALL_DELETE, DELETE} from '../actions/index';
 import reducer from '../reducers/index';
 import { Button, Form, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ComponentF from './ComponentF';
+import { Store } from '../store/index';
+
 
 const ComponentB = () =>{
   const [ state, dispatch ] = useReducer(reducer, []);
   const [ title, setTitle ] = useState('');
   const [ body, setBody ] = useState('');
   const [ comment, setComment ] = useState('');
+
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -41,7 +45,7 @@ return (
   <div>
   <div>ComponentB</div>
   <Link to="componentc">ComponentCへ移動</Link>
-
+  <ComponentF />
 <Form>
   <Form.Group controlId="formBasicPassword">
     <Form.Label>Title</Form.Label>

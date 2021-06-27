@@ -4,6 +4,7 @@ import { Table, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import reducer from '../reducers/index';
+import ComponentD from './ComponentD';
 
 const initialCount = {
   count: 0
@@ -49,6 +50,7 @@ const getData = () => {
 
   return(
     <div>
+      <ComponentD />
       <div>ComponentC</div>
       <Button variant="success" onClick={getData}>getData</Button>{' '}
       <Link to="/">ComponentAへ戻る</Link>

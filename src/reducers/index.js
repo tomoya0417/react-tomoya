@@ -1,4 +1,4 @@
-import { INCREMENT, DECREMENT, RESET, ADD_EVENT, ALL_DELETE, DELETE } from '../actions/index';
+import { INCREMENT, DECREMENT, RESET, ADD_EVENT, ALL_DELETE, DELETE, } from '../actions/index';
 
 const reducer = (state = [], action) => {
     switch (action.type) {
@@ -22,6 +22,7 @@ const reducer = (state = [], action) => {
         case DELETE:
             const point = state.filter(state => state.id !== action.id);
             return point
+
 
             default:
                 return state;
